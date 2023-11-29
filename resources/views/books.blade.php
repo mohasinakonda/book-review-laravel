@@ -1,12 +1,12 @@
 <x-app>
-    <div class="bg-white pt-10 max-w-2xl mx-auto px-5">
+    <div class="max-w-2xl px-5 pt-10 mx-auto bg-white">
 
         <h2 class="text-5xl text-center">Book lists</h2>
         <form action="{{ route('books.index') }}" method="GET">
             <div class="mt-5 ">
                 <input type="hidden" name="filter" value="{{ request('filter') }}">
                 <input type="text" name="title" placeholder="Search books"
-                    class="border border-gray-300 rounded px-4 py-2 w-full" value="{{ request('title') }}">
+                    class="w-full px-4 py-2 border border-gray-300 rounded" value="{{ request('title') }}">
             </div>
         </form>
 
@@ -20,14 +20,14 @@
             ];
         @endphp
 
-        <div class="bg-gray-100 my-5 p-5">
+        <div class="p-5 my-5 bg-gray-100">
             @foreach ($filter as $key => $value)
                 <a href="{{ route('books.index', ['title' => request('title'), 'filter' => $key]) }}"
                     class="inline-block px-4 py-2  {{ request('filter') == $key ? 'bg-gray-300 shadow' : '' }}">{{ $value }}</a>
             @endforeach
         </div>
         @forelse ($books as $book)
-            <div class="bg-gray-100 mt-4 px-4 shadow ">
+            <div class="px-4 mt-4 bg-gray-100 shadow ">
 
                 <h2 class="text-2xl text-gray-600"><a href="{{ route('books.show', $book) }}">{{ $book->title }}</a>
                 </h2>
@@ -37,10 +37,11 @@
                         <cite>{{ $book->author }}</cite>
                         <small class="ml-3">{{ $book->created_at }}</small>
                     </div>
-                    <div>
+                    <div class="flex gap-2">
 
-                        <a href="#" class="underline">{{ number_format($book->review_avg_rating, 1) }}
-                            Ratted</a>
+                        {{-- <a href="#" class="underline">{{ number_format($book->review_avg_rating, 1) }}
+                            Ratted</a> --}}
+                        <x-star-rating :rating="$book->review_avg_rating" />
                         <p>{{ $book->review_count }} {{ Str::plural('review') }}</p>
 
                     </div>
@@ -51,7 +52,7 @@
                 <p class="text-center">No books found</p>
                 <div class="text-center">
 
-                    <a href="{{ route('books.index') }}" class="underline text-gray-600 font-bold">reload the page</a>
+                    <a href="{{ route('books.index') }}" class="font-bold text-gray-600 underline">reload the page</a>
                 </div>
 
             </div>
