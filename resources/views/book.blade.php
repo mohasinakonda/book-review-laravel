@@ -1,5 +1,6 @@
 <x-app>
     <div class="max-w-2xl p-5 mx-auto bg-white">
+        <a href="{{ route('books.index') }}" class="font-bold text-gray-600 underline">Back to books</a>
         <h2 class="text-5xl">{{ $book->title }}</h2>
         <cite>{{ $book->author }}</cite>
         <div class="flex justify-between py-2">
