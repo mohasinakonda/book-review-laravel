@@ -49,8 +49,9 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Book $book)
+    public function show($id)
     {
+        $book = Book::with('review')->withReviewsCount()->withAvgRating()->findOrFail($id);
         return view('book', ['book' => $book]);
     }
 
