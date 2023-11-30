@@ -28,9 +28,14 @@
         </div>
         @forelse ($books as $book)
             <div class="px-4 mt-4 bg-gray-100 shadow ">
+                <div class="flex justify-between">
 
-                <h2 class="text-2xl text-gray-600"><a href="{{ route('books.show', $book) }}">{{ $book->title }}</a>
-                </h2>
+                    <h2 class="text-2xl text-gray-600"><a
+                            href="{{ route('books.show', $book) }}">{{ $book->title }}</a>
+                    </h2>
+                    <a class="underline" href="{{ route('books.edit', $book) }}">Edit</a>
+                </div>
+
                 <div class="flex justify-between py-2">
                     <div>
 
@@ -39,8 +44,6 @@
                     </div>
                     <div class="flex gap-2">
 
-                        {{-- <a href="#" class="underline">{{ number_format($book->review_avg_rating, 1) }}
-                            Ratted</a> --}}
                         <x-star-rating :rating="$book->review_avg_rating" />
                         <p>{{ $book->review_count }} {{ Str::plural('review') }}</p>
 
