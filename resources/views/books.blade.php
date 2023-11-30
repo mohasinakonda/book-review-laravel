@@ -2,12 +2,14 @@
     <div class="max-w-2xl px-5 pt-10 mx-auto bg-white">
 
         <h2 class="text-5xl text-center">Book lists</h2>
-        <form action="{{ route('books.index') }}" method="GET">
-            <div class="mt-5 ">
+        <form action="{{ route('books.index') }}" method="GET" class="flex gap-5 mt-5">
+            <div class="w-[500px]">
                 <input type="hidden" name="filter" value="{{ request('filter') }}">
                 <input type="text" name="title" placeholder="Search books"
-                    class="w-full px-4 py-2 border border-gray-300 rounded" value="{{ request('title') }}">
+                    class="w-full px-4 py-2 border border-gray-300 rounded " value="{{ request('title') }}">
             </div>
+            <a href="{{ route('books.create') }}" class="block w-32 h-10 p-1 px-5 border border-gray-400 rounded">Add a
+                book</a>
         </form>
 
         @php
