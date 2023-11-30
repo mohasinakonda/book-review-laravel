@@ -10,8 +10,8 @@
                 <p>{{ $book->review_count }} {{ Str::plural('review') }}</p>
             </div>
 
-
         </div>
+        <a href="{{ route('books.review.create', $book) }}" class="underline">Add review</a>
         <h2 class="pt-10 text-3xl font-medium">Reviews</h2>
         <div class="bg-gray-100">
             @forelse($book->review as $review)
