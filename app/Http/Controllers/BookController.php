@@ -16,13 +16,13 @@ class BookController extends Controller
         $title = $request->input('title');
         $books = Book::when($title, function ($query, $title) {
             return $query->title($title);
-        })->withAvg('review', 'rating');
+        });
         $books = match ($filter) {
             'popular_in_last_month' => $books->popularLastMonth(),
             'popular_in_last_6months' => $books->popularLast6Months(),
             'highest_rated_last_month' => $books->highestRatedLastMonth(),
             'highest_rated_last_6months' => $books->highestRatedLast6Months(),
-            default => $books->withReviewsCount()->latest()
+            default => $books->withReviewsCount()->withAvgRating()->latest()
         };
 
         $books = $books->paginate(10);
