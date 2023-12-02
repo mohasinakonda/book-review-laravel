@@ -35,7 +35,15 @@
                     <h2 class="text-2xl text-gray-600"><a
                             href="{{ route('books.show', $book) }}">{{ $book->title }}</a>
                     </h2>
-                    <a class="underline" href="{{ route('books.edit', $book) }}">Edit</a>
+                    <div class="flex gap-2">
+
+                        <a class="underline" href="{{ route('books.edit', $book) }}">Edit</a>
+                        <form action="{{ route('books.destroy', $book) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="underline" type="submit">Delete</button>
+                        </form>
+                    </div>
                 </div>
 
                 <div class="flex justify-between py-2">
@@ -51,6 +59,7 @@
 
                     </div>
                 </div>
+                <p class="pb-5">{{ $book->excerpt }}</p>
             </div>
         @empty
             <div class="py-10">
@@ -62,5 +71,18 @@
 
             </div>
         @endforelse
+
+        <div class="flex justify-center gap-3 pb-10 pt-5">
+
+
+            <a class="underline" href="{{ $books->previousPageUrl() }}">prev</a>
+            <p>
+
+                <span class="font-bold">{{ $books->currentPage() }}</span>/
+                <span>{{ $books->lastPage() }}</span>
+            </p>
+            <a class="underline" href=" {{ $books->nextPageUrl() }}">next</a>
+
+        </div>
     </div>
 </x-app>

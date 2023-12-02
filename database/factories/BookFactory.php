@@ -19,6 +19,8 @@ class BookFactory extends Factory
         return [
             'title' => fake()->sentence(5),
             'author' => fake()->name,
+            'excerpt' => fake()->sentences(3, true),
+            'description' => fake()->sentences(10, true),
             'created_at' => fake()->dateTimeBetween('-2 years'),
             'updated_at' => function (array $attributes) {
                 return fake()->dateTimeBetween($attributes['created_at']);

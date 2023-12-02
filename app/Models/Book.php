@@ -15,7 +15,7 @@ class Book extends Model
     {
         return $this->hasMany(Review::class);
     }
-    protected $fillable = ['title', 'author'];
+    protected $fillable = ['title', 'author', 'excerpt', 'description'];
 
     public function scopeTitle(Builder $query, string $title): Builder
     {

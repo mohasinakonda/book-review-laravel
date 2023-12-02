@@ -25,7 +25,8 @@ class BookController extends Controller
             default => $books->withReviewsCount()->latest()
         };
 
-        $books = $books->get();
+        $books = $books->paginate(10);
+        // return $books;
 
         return view('books', ['books' => $books]);
     }
@@ -85,8 +86,9 @@ class BookController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Book $book)
     {
-        //
+        $book->delete();
+        return redirect()->route('books.index');
     }
 }
