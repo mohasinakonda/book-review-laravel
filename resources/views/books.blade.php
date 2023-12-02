@@ -32,8 +32,11 @@
             <div class="px-4 mt-4 bg-gray-100 shadow ">
                 <div class="flex justify-between">
 
-                    <h2 class="text-2xl text-gray-600"><a
-                            href="{{ route('books.show', $book) }}">{{ $book->title }}</a>
+                    <h2 class="text-2xl text-gray-600">
+
+                        <a href="{{ route('books.show', $book) }}">
+                            {!! preg_replace('/(' . request('title') . ')/i', '<mark> $1</mark>', $book->title) !!}
+                        </a>
                     </h2>
                     <div class="flex gap-2">
 
