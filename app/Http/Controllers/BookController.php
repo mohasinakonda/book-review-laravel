@@ -58,8 +58,10 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        $book = Book::with(['review' => fn($query) => $query->latest()])->withReviewsCount()->withAvgRating()->findOrFail($id);
-        return view('book', ['book' => $book]);
+        $book = Book::withReviewsCount()->withAvgRating()->findOrFail($id);
+        $reviews = $book->review()->latest()->paginate(10);
+
+        return view('book', ['book' => $book, 'reviews' => $reviews]);
     }
 
     /**

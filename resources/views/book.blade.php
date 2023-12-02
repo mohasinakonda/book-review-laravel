@@ -18,7 +18,7 @@
         </div>
         <h2 class="pt-10 text-3xl font-medium">Reviews</h2>
         <div class="bg-gray-100">
-            @forelse($book->review as $review)
+            @forelse($reviews as $review)
                 <div class="p-4 mt-5 bg-white shadow">
                     <h3 class="text-xl font-medium">{{ $review->reviewer }}</h3>
                     <span class="font-bold"><x-star-rating :rating="$review->rating" /></span>
@@ -27,5 +27,13 @@
                 </div>
             @empty <p>No review Available</p>
             @endforelse
+            <div class="flex justify-center gap-3">
+                <a class="underline" href="{{ $reviews->previousPageUrl() }}">prev</a>
+                <p>
+                    <span class="font-bold">{{ $reviews->currentPage() }}</span>/
+                    <span class="font-bold">{{ $reviews->lastPage() }}</span>
+                </p>
+                <a class="underline" href="{{ $reviews->nextPageUrl() }}">next</a>
+            </div>
         </div>
 </x-app>
